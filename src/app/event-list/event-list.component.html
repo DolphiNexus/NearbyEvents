@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Events List</h1>
+  <!-- It won't show if there is no event data -->
+  <a routerLink="/register-event" class="btn btn-success" *ngIf="hideWhenNoEvent">
+    <i class="fas fa-plus custom-fa-plus"></i>
+    Add Event
+  </a>
+</div>
+
+<div class="pricing-header mx-auto">
+
+  <!-- Preloader shows before the data loads-->
+  <div class="no-data text-center" *ngIf="preLoader">
+    <img src="assets/preloader.gif" class="preloader-icon" alt="No events">
+  </div>
+
+  <!-- No data shows when their is no event data available -->
+  <div class="no-data text-center" *ngIf="noData">
+    <img src="assets/no-event.svg" class="nodata-msg" alt="No event">
+    <p class="nodata-msg">No events added yet!</p>
+    <a routerLink="/register-event" class="btn btn-success">
+      <i class="fas fa-plus custom-fa-plus"></i>
+      Add Event
+    </a>
+  </div>
+
+  <!-- Showing events data -->
+  <div class="table-responsive" *ngIf="hideWhenNoEvent">
+    <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+      <thead>
+        <tr>
+          <th scope="col">Event Id</th>
+          <th scope="col">Event</th>
+          <th scope="col">Description</th>
+          <th scope="col">Time</th>
+          <th scope="col">Date</th>
+          <th class="text-center" scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- *ngFor loop iterates over Event array and fetch the event's data -->
+        <!-- paginate pipe will add pagination in event list, it won't show if items are less then 7 -->
+        <tr *ngFor="let event of Event | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
+          <th scope="row">{{event.$key}}</th>
+          <td>{{event.event}}</td>
+          <td>{{event.description}}</td>
+          <td>{{event.time}}</td>
+          <td>{{event.date}}</td>
+          <td class="text-center action-block">
+            <!-- routerLink="/edit-event/{{event.$key}}" is refered to { path: 'edit-event/:id', component: EditEventComponent } in app-routing.moudles.ts -->
+            <i class="far fa-edit" routerLink="/edit-event/{{event.$key}}"></i>
+            <i class="far fa-trash-alt" (click)="deleteEvent(event)"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Pagination -->
+  <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>
+</div>

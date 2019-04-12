@@ -1,0 +1,56 @@
+<!-- Top navigation -->
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/register-event">
+    <img class="brand-logo" src="assets/logo-positronx-white.svg" alt="positronX.io Logo">
+    <span class="dasboard-text">Dashboard</span>
+  </a>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" routerLink="/register-event">
+        <span class="user-image" style="background-image: url('assets/user.jpg')"></span>
+        Hello Admin
+      </a>
+    </li>
+  </ul>
+</nav>
+<br>
+<br>
+<br>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+
+          <!-- routerLink="/register-event" to navigate to view-events component -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register-event" routerLinkActive="active">
+              <i class="fas fa-plus"></i>Add Event
+            </a>
+          </li>
+
+          <!-- routerLink="/view-events" to navigate to view-events component -->
+          <!-- routerLinkActive="active" activates active class for component-->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/view-events" routerLinkActive="active">
+              <i class="fas fa-list-ul"></i>Events List
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="inner-adjust">
+
+        <!-- Use router template to show the components for which router service is activated -->
+        <router-outlet></router-outlet>
+
+      </div>
+    </main>
+
+  </div>
+</div>
