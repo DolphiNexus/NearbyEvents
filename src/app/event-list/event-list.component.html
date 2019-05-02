@@ -27,30 +27,14 @@
   <!-- Showing events data -->
   <div class="table-responsive" *ngIf="hideWhenNoEvent">
     <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
-      <thead>
-        <tr>
-          <th scope="col">Event Id</th>
-          <th scope="col">Event</th>
-          <th scope="col">Description</th>
-          <th scope="col">Time</th>
-          <th scope="col">Date</th>
-          <th class="text-center" scope="col">Edit</th>
-        </tr>
-      </thead>
       <tbody>
         <!-- *ngFor loop iterates over Event array and fetch the event's data -->
         <!-- paginate pipe will add pagination in event list, it won't show if items are less then 7 -->
-        <tr *ngFor="let event of Event | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
-          <th scope="row">{{event.$key}}</th>
-          <td>{{event.event}}</td>
-          <td>{{event.description}}</td>
-          <td>{{event.time}}</td>
-          <td>{{event.date}}</td>
-          <td class="text-center action-block">
-            <!-- routerLink="/edit-event/{{event.$key}}" is refered to { path: 'edit-event/:id', component: EditEventComponent } in app-routing.moudles.ts -->
-            <i class="far fa-edit" routerLink="/edit-event/{{event.$key}}"></i>
-            <i class="far fa-trash-alt" (click)="deleteEvent(event)"></i></td>
-        </tr>
+          <mat-card class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg" *ngFor="let event of Event | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
+          <mat-card-title>{{event.event}}</mat-card-title>
+          <mat-card-content>{{event.description}}</mat-card-content>
+          <mat-card-footer>{{event.time}}  {{event.date}}</mat-card-footer>
+        </mat-card>
       </tbody>
     </table>
   </div>
